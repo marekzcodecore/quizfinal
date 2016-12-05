@@ -10,16 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205181043) do
+ActiveRecord::Schema.define(version: 20161205231037) do
 
   create_table "auctions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title"
+    t.text     "description"
+    t.integer  "min_price"
+    t.datetime "end_date"
+    t.datetime "start_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "aasm_state"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_auctions_on_user_id"
   end
 
   create_table "bids", force: :cascade do |t|
+    t.integer  "amount"
+    t.integer  "auction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["auction_id"], name: "index_bids_on_auction_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

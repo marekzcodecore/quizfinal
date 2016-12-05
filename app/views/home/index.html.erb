@@ -1,2 +1,7 @@
 <h1> Welcome to action auctions </h1>
 
+<h2> Available auctions </h2>
+<% @auctions.each do |auction| %>
+  <%= link_to auction.title, auction %>
+  <hr>
+<% end %>

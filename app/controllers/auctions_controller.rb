@@ -8,20 +8,27 @@ class AuctionsController < ApplicationController
   	@auction = Auction.new
   end
 
-  def create
-  		auction_params =(
-		params.require(:auction).permit(
-		[:title, :description, :price])
-		)
-	  @auction = Auction.new auction_params
-		if @auction.save
-			redirect_to auction_path(@auction)
-		end
+	def create
+	   auction_params = params.require(:auction)
+			.permit([:title,
+					 :description,
+					 :min_price,
+					 :end_date,
+					 :start_date
+			#		 :id,
+			#		 :_destroy
+					 ])
 
-  end
-
+        @auction = auction.new auction_params
+	    if @auction.save
+   	     redirect_to auction_path(@auction)
+	    else
+	      render :new
+   	    end
+	end
 
   def show
+  		@auction = Auction.find params[:id]
   end
 
 

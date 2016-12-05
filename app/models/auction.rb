@@ -12,8 +12,8 @@ class Auction < ApplicationRecord
   has_many :bids, dependent: :destroy
 
 	validates :title, presence: true, uniqueness: true
-	validates :min_price, numericality: { greater_than_or_equal_to: 1 }
-  													 allow_destroy: true
+	# validates :min_price, numericality: { greater_than_or_equal_to: 1 },
+  	#												 allow_destroy: true
 
   include AASM
   aasm whiny_transitions: false do
