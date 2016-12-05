@@ -19,7 +19,7 @@ class AuctionsController < ApplicationController
 			#		 :_destroy
 					 ])
 
-        @auction = auction.new auction_params
+        @auction = Auction.new auction_params
 	    if @auction.save
    	     redirect_to auction_path(@auction)
 	    else
