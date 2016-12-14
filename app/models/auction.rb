@@ -39,9 +39,6 @@ class Auction < ApplicationRecord
 			transitions from: [:draft, :published, :openbid], to: :canceled
 		end
 
-		event :relaunch do
-			transitions from: :canceled, to: :draft
-		end	
 	end
 
 	def titleized_title

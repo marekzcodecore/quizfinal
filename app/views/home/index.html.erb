@@ -1,7 +1,22 @@
 <h1> Welcome to action auctions </h1>
 
-<h2> Available auctions </h2>
+<br>
+
+<h3> select auction date </h3>
+
+ 
+<p>Date: <input type="text" id="datepicker"></p>
+ 
+
+
 <% @auctions.each do |auction| %>
   <%= link_to auction.title, auction %>
   <hr>
 <% end %>
+
+  <script>
+
+  $( function() {
+    $( "#datepicker" ).datepicker({minDate: 0});
+  } );
+  </script>

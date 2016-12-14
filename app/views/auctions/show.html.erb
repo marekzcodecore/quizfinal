@@ -8,5 +8,17 @@
                            data: { confirm: 'Are you sure?' } %>
   </p>
 <% elsif @auction.published? %>
-  <p>auction is published</p>
+  <p>auction is ready to be bid on</p>
+
+  <p> current bid is : <%= @auction.bids.maximum(:amount) %> </p>
+    <br>
+  <p> how much do you bid? </p>
+    <%#= link_to 'Bid', auction_bids_path(@auction), method: :post %>
+    <%= simple_form_for [@auction, @bid]  do |f| %>
+
+    <%= f.input :amount, input_html: { min: @auction.bids.maximum(:amount) +1} %>
+    <%= f.submit "Approve", 
+     data: { confirm: 'Are you sure?' }, action: :bid %>
+  <% end %>
+
 <% end %>
