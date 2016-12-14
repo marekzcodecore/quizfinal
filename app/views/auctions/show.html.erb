@@ -10,13 +10,13 @@
 <% elsif @auction.published? %>
   <p>auction is ready to be bid on</p>
 
-  <p> current bid is : <%= @auction.bids.maximum(:amount) %> </p>
+  <p> current bid is : <%= @auction.bids.maximum(:amount) || 'none' %> </p>
     <br>
   <p> how much do you bid? </p>
     <%#= link_to 'Bid', auction_bids_path(@auction), method: :post %>
     <%= simple_form_for [@auction, @bid]  do |f| %>
-
-    <%= f.input :amount, input_html: { min: @auction.bids.maximum(:amount) +1} %>
+    <%= f.input :amount,
+     input_html: { min: @auction.bids.maximum(:amount).to_f + 1 || @auction.min_price } %>
     <%= f.submit "Approve", 
      data: { confirm: 'Are you sure?' }, action: :bid %>
   <% end %>
